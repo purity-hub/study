@@ -1,0 +1,42 @@
+﻿![在这里插入图片描述](https://img-blog.csdnimg.cn/c5694c3fcd37468c90667188e17d9cc5.png)
+
+```html
+<script>
+	$('button').eq(0).click(fuction(){
+		$.get('http://127.0.0.1:3000/jquery-serve',{a:100,b:200},function(data){
+			//console.log(data);
+		},'json')
+	})
+	$('button').eq(1).click(fuction(){
+		$.post('http://127.0.0.1:3000/jquery-serve',{a:100,b:200},function(data){
+			//console.log(data);
+		})
+	})
+	$('button').eq(2).click(function(){
+		$.ajax({
+			url:http://127.0.0.1:3000/jquery-serve,
+			data:{a:100,b:200},
+			type:'GET',
+			//响应体结果
+			dataType:'json',
+			//成功的回调
+			success.fuction(data){
+				console.log(data);
+			}
+			//超时时间
+			timeout:2000,
+			error.function(){
+				console.log('出错了！！')
+			}，
+			//头信息
+			headers:{
+				c:300,
+				d:400
+			}
+		})
+	})
+</script>
+```
+[jQuery-AJAX(往期文章)](https://blog.csdn.net/m0_53200158/article/details/120590459)
+
+
