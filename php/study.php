@@ -1,6 +1,6 @@
-<!DOCTYPE html> 
-<html> 
-<body> 
+<!DOCTYPE html>
+<html>
+<body>
 
 <?php
 /* 标记与注释:<?php ?>(注释之间不能出现结束标记符)*/
@@ -21,7 +21,7 @@ if(abs($a-$b) < $epsilon) {
     echo "<br />a==b:true";
 }
 ?>
-<?php 
+<?php
 $a = "100 pigs"+12;
 echo "100 pigs+12的结果为"+ $a;
 //这里输出"Warning: A non-numeric value encountered in D:\Apache\Apache24\htdocs\ceshi.php on line 26"
@@ -88,11 +88,12 @@ function test_global_noref() {
 }
 
 test_global_ref();
+$obj =‘’;
 var_dump($obj);
 test_global_noref();
 var_dump($obj);
 ?>
-<?php 
+<?php
 function double($i){
     return $i+2;
 }
@@ -103,7 +104,7 @@ $e = $d = ++$b;
 $f = double($d++);
 $g = double(++$e);
 $h = $g += 10;
-?> 
+?>
 <?php
 //PHP常量
 define('PI',3.141592653589793);
@@ -132,5 +133,5 @@ echo '<hr/>',__DIR__,'<br/>',__FILE__;
 ?>
 
 
-</body> 
+</body>
 </html>

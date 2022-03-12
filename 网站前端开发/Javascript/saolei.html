@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>document</title>
+</head>
+<style>
+    .container {
+        width: 500px;
+        height: 500px;
+        margin: 50px auto;
+        border: 3px solid #999;
+        position: relative;
+    }
+</style>
+
+<body>
+    <div class="container">
+
+    </div>
+</body>
+<script src="./js/tool.js"></script>
+<script>
+    var container = document.querySelector('.container')
+    // 动态创建100个小div放在container里面
+    var mineWidth = 50;
+    var mineHeight = 50;
+    // 求小div的数量
+    var mineNum = container.clientWidth * container.clientHeight / (mineWidth * mineHeight)
+    // 求一行几个
+    var mineColNum = container.clientWidth / mineWidth;
+    // 循环创建
+    for (var i = 0; i < mineNum; i++) {
+        var div = document.createElement('div')
+        Tool.setStyle(div, {
+            width: mineWidth - 2 + "px",
+            height: mineHeight - 2 + "px",
+            backgroundColor: "#ccc",
+            border: "1px solid #fff",
+            position: "absolute",
+            left: (i % mineColNum) * mineWidth + "px",
+            top: parseInt(i / mineColNum) * mineHeight + "px",
+            textAlign: "center",
+            lineHeight: "50px"
+        })
+        container.appendChild(div)
+        div.mine = false // 表示所有div初始都不是雷
+        this.show = false; // 表示所有div里面的数字都没有展开
+    }
+
+    // 标记雷
+    // 定义一个用来存放雷div的下标的数组
+    var arr = [];
+    for (var i = 0; i < 10; i++) {
+        // 获取随机下标
+        var index = Math.floor(Math.random() * 100)
+        // 判断数组中是否已经有了这个下标
+        if (arr.indexOf(index) < 0) {
+            arr.push(index)
+        } else {
+            i--
+        }
+    }
+    // 遍历所有雷div的下标数组，给是雷的div标记
+    for (var i = 0; i < arr.length; i++) {
+        container.children[arr[i]].mine = true
+        // container.children[arr[i]].style.backgroundColor = 'red';
+    }
+    // 定义一个数组，将周围div的下标存起来
+    var brr = [-11, -10, -9, -1, 1, 9, 10, 11];
+    // 遍历每个div周围的div
+    // 遍历这个100个div
+    for (var i = 0; i < container.children.length; i++) {
+        // 如果当前这个div是雷就统计了
+        if (container.children[i].mine) {
+            continue;
+        }
+        // container.children[i] // 每个div
+        // 查看当前div周围的所有div
+        // 定义周围雷数量的变量
+        var num = 0
+        for (var j = 0; j < brr.length; j++) {
+            // 考虑最上面一行 - 不能-11 不能-10 不能-9
+            if (i < mineColNum && (brr[j] === -11 || brr[j] === -10 || brr[j] === -9)) {
+
+                continue;
+            }
+            // // 最左边一行过滤掉
+            if (i % mineColNum === 0 && (brr[j] === -11 || brr[j] === -1 || brr[j] === 9)) {
+                continue;
+            }
+            // 最下面一行
+            if (parseInt(i / mineColNum) === mineColNum - 1 && (brr[j] === 9 || brr[j] === 10 || brr[j] === 11)) {
+                continue;
+            }
+            // 最右边一行
+            if (i % mineColNum === mineColNum - 1 && (brr[j] === -9 || brr[j] === 1 || brr[j] === 11)) {
+                continue;
+            }
+            if (container.children[i + brr[j]].mine) {
+                num++
+            }
+        }
+        // 将雷的数量放在div中
+        container.children[i].num = num
+    }
+    // 点击
+    for (var i = 0; i < container.children.length; i++) {
+        container.children[i].index = i
+        container.children[i].onclick = function () {
+            if (this.mine) {
+                // 如果点击到雷了
+                for (var j = 0; j < container.children.length; j++) {
+                    // 给所有不是雷的div设置内容显示，雷的数量
+                    container.children[j].innerText = container.children[j].num ? container.children[j].num : '';
+                    container.children[j].style.backgroundColor = '#0f0';
+                }
+                // 将所有是雷的div设置为红色
+                for (var j = 0; j < arr.length; j++) {
+                    container.children[arr[j]].style.backgroundColor = 'red';
+                }
+            } else {
+                // 如果不是雷
+                // this.innerText = this.num;
+                // this.style.backgroundColor = '#0f0';
+                // this.show = true // 表示当前这个div已经展开了
+                openAround(this.index)
+
+            }
+        }
+
+        container.children[i].oncontextmenu = function () {
+            this.style.backgroundColor = 'blue';
+            return false;
+        }
+    }
+
+    // 打开周围div的递归函数
+    function openAround(index) {
+        container.children[index].innerText = container.children[index].num
+        container.children[index].style.backgroundColor = '#0f0'
+        container.children[index].show = true
+        if (container.children[index].num === 0) {
+            container.children[index].style.backgroundColor = 'pink';
+            for (let j = 0; j < brr.length; j++) {
+                if (index < mineColNum && (brr[j] === -11 || brr[j] === -10 || brr[j] === -9)) {
+                    continue;
+                }
+                // // 最左边一行过滤掉
+                if (index % mineColNum === 0 && (brr[j] === -11 || brr[j] === -1 || brr[j] === 9)) {
+                    continue;
+                }
+                // 最下面一行
+                if (parseInt(index / mineColNum) === mineColNum - 1 && (brr[j] === 9 || brr[j] === 10 || brr[j] === 11)) {
+                    continue;
+                }
+                // 最右边一行
+                if (index % mineColNum === mineColNum - 1 && (brr[j] === -9 || brr[j] === 1 || brr[j] === 11)) {
+                    continue;
+                }
+
+                if (container.children[index + brr[j]].show) {
+                    continue
+                }
+                openAround(index + brr[j])
+            }
+        }
+
+    }
+</script>
+
+</html>
