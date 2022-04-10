@@ -1,0 +1,96 @@
+<!--pages/list/list.wxml-->
+<view class="container1">
+<view>A</view>
+<view>B</view>
+<view>C</view>
+</view>
+<scroll-view class="container2" scroll-y>
+  <view>A</view>
+  <view>B</view>
+  <view>C</view>
+</scroll-view>
+<swiper class="swiper-container" indicator-dots autoplay>
+  <swiper-item class="item">A</swiper-item>
+  <swiper-item class="item">B</swiper-item>
+  <swiper-item class="item">C</swiper-item>
+</swiper>
+<view>
+  <text>后面的文字支持长按选中:</text>
+  <text selectable="true">能被选中的文字</text>
+</view>
+<rich-text nodes="<h1 style='color: red';>标题</h1>"></rich-text>
+<button>默认按钮</button>
+<button type="primary">主色调按钮</button>
+<button type="warn">警告按钮</button>
+<button size="mini">默认按钮</button>
+<button type="primary" size="mini">主色调按钮</button>
+<button type="warn" size="mini">警告按钮</button>
+<button size="mini" plain>默认按钮</button>
+<button type="primary" size="mini" plain>主色调按钮</button>
+<button type="warn" size="mini" plain>警告按钮</button>
+<!-- 前面斜杆代表根目录 -->
+<image src="/images/image.png" class="image1" mode="aspectFit"></image>
+<!-- 语法和Vue很像,简单区别一下 -->
+<view>{{info}}</view>
+<image src="{{imageSrc}}" mode="widthFix"></image>
+<!-- 三元运算符 -->
+<view>{{randomNum1 >= 5 ? '数字大于等于5' : '数字小于5'}}</view>
+<!-- 事件绑定 -->
+<button type="primary" bindtap="btnTapHandler">点我控制台打印</button>
+<!-- 数字加一 -->
+<view class="addnumber">
+  <text>{{number1}}</text>
+  <!-- data-*代表传参 -->
+  <button type="primary" bindtap="addNum1" data-pnum="{{1}}">点我数字加一</button>
+</view>
+<!-- 输入input -->
+<view>
+  您输入的值为:<text>{{msg}}</text><text wx:if="{{msg==''}}">空</text>
+  <input value="{{msg}}" bindinput="inputHandler"></input>
+</view>
+<!-- 条件渲染 --><!--会频繁的移除与添加元素-->
+<view wx:if="{{type===1}}">性别:男</view>
+<view wx:elif="{{type===2}}">性别:女</view>
+<view wx:else>性别:保密</view>
+<!-- 也可以用block标签包裹多个标签,不会被渲染 -->
+<!-- 列表渲染 -->
+<view wx:for="{{arr1}}" wx:for-index="index" wx:for-item="itemm">{{index}}-{{itemm}}</view>
+<!-- wx:for循环 -->
+<view wx:for="{{userList}}" wx:key="id" class="username">
+  {{item.name}}
+</view>
+<!-- 测试get和post -->
+<button bindtap="getInfo">发起GET请求</button>
+<button bindtap="postInfo">发起POST请求</button>
+<!-- 导航栏 -->
+<navigator url="/pages/index/index" open-type="switchTab">导航到首页</navigator>
+<navigator url="/pages/logs/logs" open-type="navigate">导航到logs</navigator>
+<!-- 按钮函数式跳转导航栏 -->
+<button type="primary" bindtap="gotoIndex">跳转到首页</button>
+<button type="primary" bindtap="gotoLogs">跳转到logs</button>
+<!-- 小写转化 -->
+<!-- IOS设备性能比js好2~20倍;安卓则相似 -->
+<!-- 外联脚本 -->
+<wxs src="../../utils/tools.wxs" module="m2"></wxs>
+<view>
+  <view><text>您输入的值转化为大写字母为:{{m1.toUpper(upperInput)}}</text></view>
+  <view><text>您输入的值转化为小写字母为:{{m2.toLower(upperInput)}}</text></view>
+  <input value="{{upperInput}}" bindinput="ChangeUpper"></input>
+  </view>
+  <!-- 内嵌脚本 -->
+<wxs module="m1">
+  module.exports.toUpper=function(str){
+    return str.toUpperCase()
+  }
+</wxs>
+<!-- 导入自定义组件 -->
+<!-- 和vue很像,似乎是一种大一统的趋势,重点还是学其内功,学其思想 -->
+<my-test1 max="9" count="{{count}}" bind:sync="syncCount" class="zizujian1">
+  <!-- 插槽 -->
+  <view slot="info"><text>这里是插槽占位</text></view>
+  <view slot="before">before插槽</view>
+  <view slot="after">after插槽</view>
+  <!-- 父组件 -->
+</my-test1>
+<view>父组件中,count的值是{{count}}</view>
+<button bindtap="getChild">获取子组件实例对象,执行加一方法</button>

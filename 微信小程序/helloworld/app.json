@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/list/list",
+    "pages/contact/contact",
+    "pages/logs/logs",
+    "pages/shoplist/shoplist"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#2b4b6b",
+    "navigationBarTitleText": "本地生活",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false,
+    "backgroundColor": "#efefef",
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "list": [
+      {
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "selectedIconPath": "images/tabs/home-active.png",
+      "iconPath": "images/tabs/home.png"
+    },
+    {
+      "pagePath": "pages/list/list",
+      "text": "学习",
+      "selectedIconPath": "images/tabs/study-active.png",
+      "iconPath": "images/tabs/study.png"
+    },{
+      "pagePath": "pages/contact/contact",
+      "text": "联系我",
+      "selectedIconPath": "images/tabs/contact-active.png",
+      "iconPath": "images/tabs/contact.png"
+    }]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

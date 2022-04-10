@@ -1,0 +1,25 @@
+<!--components/test/test.wxml-->
+<text>test组件</text>
+<view><text>Count的值是 {{count}}</text></view>
+<button bindtap="AddCount">点我加一</button>
+<!-- 测试监听 -->
+<view class="addInput">
+  <input type="text" value="{{n1}}" bindinput="setN1"></input>
+  <text>+</text>
+  <input type="text" value="{{n2}}" bindinput="setN2"></input>
+  <text>=</text>
+  <input type="text" value="{{sum}}"></input>
+</view>
+<!-- 颜色 -->
+<view style="background-color: rgb({{fullColor}});" class="colorBox">颜色值: {{fullColor}}</view>
+<button size="mini" bindtap="changeR">R</button>
+<button size="mini" bindtap="changeG">G</button>
+<button size="mini" bindtap="changeB">B</button>
+<!-- 插槽 -->
+<slot name="before"></slot>
+<slot name="info"></slot>
+<slot name="after"></slot>
+<!-- 传值 -->
+<text>子组件中,count的值为{{count}}</text>
+<!-- 可以挂载全局变量 -->
+<view><text>在Behaviors中定义的数据{{username}}</text></view>

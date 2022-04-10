@@ -1,0 +1,17 @@
+/* components/test/test.wxss */
+.addInput{
+  display: flex;
+}
+.addInput input{
+  width: 32%;
+}
+.addInput text{
+  text-align: center;
+  justify-content: center;
+}
+.colorBox{
+  line-height: 200rpx;
+  font-size: 20rpx;
+  color: white;
+  text-align: center;
+}
