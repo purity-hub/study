@@ -1,12 +1,26 @@
 // components/test/test.js
 const myBehavior = require('../../behaviors/my-behavior')
+// store
+import {storeBindingsBehavior} from 'mobx-miniprogram-bindings'
+import {store} from '../../store/store'
 Component({
   // 挂载
-  behaviors:[myBehavior],
+  behaviors:[myBehavior,storeBindingsBehavior],
   lifetimes:{
     created(){}, //页面被显示
     attached(){}, //页面被隐藏
     datached(){} //页面尺寸发生变化
+  },
+  storeBindings:{
+    store, //指定绑定的store
+    fields:{
+      numA:()=>store.numA,
+      numB:()=>store.numB,
+      sum:'sum'
+    },
+    actions:{
+      updateNumB:'updateNumB'
+    }
   },
   pageLifetimes:{
     show:function(){
@@ -101,6 +115,10 @@ Component({
           b:Math.floor(Math.random()*256)
         }
       })
+    },
+    // store
+    btnHandler2(e){
+      this.updateNumB(e.target.dataset.step)
     }
   },
   // watch监听

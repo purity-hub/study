@@ -1,4 +1,7 @@
 {
+  "usingComponents": {
+    "van-button":"@vant/weapp/button/index"
+  },
   "pages": [
     "pages/index/index",
     "pages/list/list",
@@ -35,7 +38,7 @@
       "iconPath": "images/tabs/contact.png"
     }]
   },
-  "style": "v2",
+  
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"
 }

@@ -1,4 +1,8 @@
 // pages/list/list.js
+// store 绑定
+import {createStoreBindings} from 'mobx-miniprogram-bindings'
+// store文件
+import {store} from '../../store/store'
 Page({
 
   /**
@@ -25,7 +29,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.storeBindings = createStoreBindings(this,{
+      store,
+      fields:['numA','numB','sum'],
+      actions:['updateNumA']
+    })
   },
 
   /**
@@ -53,7 +61,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.storeBindings.destoryStoreBindings()
   },
 
   /**
@@ -167,5 +175,22 @@ Page({
     //console.log(child)
     // 获取子组件,调用子组件的方法
     child.AddCount()
+  },
+  // 对比getInfo函数,避免了回调地狱
+  // 打开增强编译
+  async getDanger(){
+    const {data:res}=await wx.p.request({
+      method:'GET',
+      url:'https://www.escook.cn/api/get',
+      data:{
+        name:'zs',
+        age: 30
+      }
+    })
+    console.log(res)
+  },
+  btnHandler1(e){
+    //console.log(e)
+    this.updateNumA(e.target.dataset.step)
   }
 })

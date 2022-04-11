@@ -1,4 +1,8 @@
 // app.js
+import {promisifyAll} from 'miniprogram-api-promise'
+// 通过wx.p找到promis,方便
+const wxp=wx.p={}
+promisifyAll(wx,wxp)
 App({
   onLaunch() {
     // 展示本地存储能力

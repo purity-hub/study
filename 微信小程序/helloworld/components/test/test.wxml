@@ -23,3 +23,8 @@
 <text>子组件中,count的值为{{count}}</text>
 <!-- 可以挂载全局变量 -->
 <view><text>在Behaviors中定义的数据{{username}}</text></view>
+<!-- store -->
+<van-button type="primary" bindtap="btnHandler2" data-step="{{1}}">
+numA+1</van-button>
+<van-button type="danger" bindtap="btnHandler2" data-step="{{-1}}">
+numA-1</van-button>

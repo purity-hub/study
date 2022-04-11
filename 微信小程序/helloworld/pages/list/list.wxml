@@ -19,10 +19,10 @@
   <text selectable="true">能被选中的文字</text>
 </view>
 <rich-text nodes="<h1 style='color: red';>标题</h1>"></rich-text>
-<button>默认按钮</button>
-<button type="primary">主色调按钮</button>
-<button type="warn">警告按钮</button>
-<button size="mini">默认按钮</button>
+<van-button>默认按钮</van-button>
+<van-button type="primary">主色调按钮</van-button>
+<van-button type="danger">警告按钮</van-button>
+<van-button size="mini">默认按钮</van-button>
 <button type="primary" size="mini">主色调按钮</button>
 <button type="warn" size="mini">警告按钮</button>
 <button size="mini" plain>默认按钮</button>
@@ -36,7 +36,7 @@
 <!-- 三元运算符 -->
 <view>{{randomNum1 >= 5 ? '数字大于等于5' : '数字小于5'}}</view>
 <!-- 事件绑定 -->
-<button type="primary" bindtap="btnTapHandler">点我控制台打印</button>
+<van-button type="primary" bindtap="btnTapHandler">点我控制台打印</van-button>
 <!-- 数字加一 -->
 <view class="addnumber">
   <text>{{number1}}</text>
@@ -60,8 +60,8 @@
   {{item.name}}
 </view>
 <!-- 测试get和post -->
-<button bindtap="getInfo">发起GET请求</button>
-<button bindtap="postInfo">发起POST请求</button>
+<van-button bindtap="getInfo" style="width:50%;">发起GET请求</van-button>
+<van-button bindtap="postInfo" style="width:50%;">发起POST请求</van-button>
 <!-- 导航栏 -->
 <navigator url="/pages/index/index" open-type="switchTab">导航到首页</navigator>
 <navigator url="/pages/logs/logs" open-type="navigate">导航到logs</navigator>
@@ -94,3 +94,11 @@
 </my-test1>
 <view>父组件中,count的值是{{count}}</view>
 <button bindtap="getChild">获取子组件实例对象,执行加一方法</button>
+<!-- promise -->
+<button type="danger" bindtap="getDanger">vant按钮</button>
+<!-- store -->
+<view>{{numA}} + {{numB}} = {{sum}}</view>
+<van-button type="primary" bindtap="btnHandler1" data-step="{{1}}">
+numA+1</van-button>
+<van-button type="danger" bindtap="btnHandler1" data-step="{{-1}}">
+numA-1</van-button>
